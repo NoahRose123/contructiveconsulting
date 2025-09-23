@@ -4,13 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Constructive Consulting - Professional Labor Services</title>
-    <meta name="description" content="Professional plumbing, demolition, handyman, and junk removal services. Reliable, quality work you can trust.">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="description" content="Constructive Consulting offers professional plumbing, demolition, handyman services, and junk removal. Reliable, quality work you can trust.">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    
     <style>
-        /* Reset and Base Styles */
+        /* Custom CSS with Greyish Blue Theme */
+        :root {
+            --primary-blue: #4a5568;
+            --secondary-blue: #718096;
+            --light-blue: #e2e8f0;
+            --accent-lavender: #9f7aea;
+            --dark-grey: #2d3748;
+            --light-grey: #f7fafc;
+            --white: #ffffff;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -18,1048 +30,475 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-            font-weight: 400;
-        }
-
-        /* Color Variables */
-        :root {
-            --primary-blue: #4a6fa5;
-            --secondary-blue: #6b8db8;
-            --light-blue: #e8f0fe;
-            --lavender: #b19cd9;
-            --dark-grey: #2c3e50;
-            --light-grey: #ecf0f1;
-            --white: #ffffff;
-            --text-dark: #2c3e50;
-            --text-light: #7f8c8d;
+            color: var(--dark-grey);
+            scroll-behavior: smooth;
         }
 
         /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+        .navbar-custom {
+            background-color: var(--primary-blue);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            height: 70px; /* Set fixed navbar height */
         }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-size: 1.8rem;
+        .navbar-brand {
+            font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary-blue);
-            text-decoration: none;
-            transition: color 0.3s ease;
+            color: var(--white) !important;
         }
 
-        .logo:hover {
-            color: var(--secondary-blue);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-dark);
+        .navbar-nav .nav-link {
+            color: var(--white) !important;
             font-weight: 500;
+            margin: 0 10px;
             transition: color 0.3s ease;
         }
 
-        .nav-links a:hover {
-            color: var(--primary-blue);
-        }
-
-        .mobile-menu {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            padding: 5px;
-        }
-
-        .mobile-menu span {
-            width: 25px;
-            height: 3px;
-            background: var(--primary-blue);
-            margin: 3px 0;
-            transition: 0.3s;
-            border-radius: 2px;
-        }
-
-        .mobile-menu.active span:nth-child(1) {
-            transform: rotate(-45deg) translate(-5px, 6px);
-        }
-
-        .mobile-menu.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .mobile-menu.active span:nth-child(3) {
-            transform: rotate(45deg) translate(-5px, -6px);
+        .navbar-nav .nav-link:hover {
+            color: var(--accent-lavender) !important;
         }
 
         /* Hero Section */
-        .hero {
-            height: 70vh;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+        .hero-section {
+            background: url('image (1).png');
+            background-size: cover;
+            background-position: center;
+            padding-top: 90px; /* Increased padding-top to account for navbar */
+            padding-bottom: 30px;
+            min-height: 450px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
             position: relative;
-            overflow: hidden;
         }
 
-        .hero::before {
+        .hero-section::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('image (1).png') center/cover;
-            opacity: 0.2;
+            background: rgba(45, 55, 72, 0.4);
             z-index: 1;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, 
-                rgba(74, 111, 165, 0.8) 0%, 
-                rgba(107, 141, 184, 0.6) 50%, 
-                rgba(177, 156, 217, 0.4) 100%);
-            z-index: 2;
         }
 
         .hero-content {
             position: relative;
-            z-index: 3;
-            max-width: 900px;
-            padding: 0 2rem;
+            z-index: 2;
+            padding: 2rem 0;
+            color: var(--white);
         }
 
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(45deg, #ffffff, #f0f8ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInUp 1s ease-out;
+        .hero-title {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--white);
+            line-height: 1.2;
         }
 
-        .hero p {
-            font-size: 1.4rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.95;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-            animation: fadeInUp 1s ease-out 0.3s both;
+        .hero-tagline {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            color: var(--white);
+            line-height: 1.4;
+            max-width: 600px;
         }
 
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-bottom: 3rem;
+        .hero-section .img-fluid {
+            max-height: 280px;
+            object-fit: cover;
+            border-radius: 4px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-primary-custom {
+            background-color: var(--white);
+            color: var(--primary-blue);
+            border: 2px solid var(--white);
+            padding: 12px 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
             animation: fadeInUp 1s ease-out 0.6s both;
         }
 
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--lavender);
-            display: block;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: var(--lavender);
-            color: white;
-            padding: 1.2rem 2.5rem;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(177, 156, 217, 0.4);
-            position: relative;
-            overflow: hidden;
-            animation: fadeInUp 1s ease-out 0.9s both;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(177, 156, 217, 0.5);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Services Section */
-        .services {
-            padding: 6rem 0;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .services::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('pexels-shkrabaanthony-5816283.jpg') center/cover;
-            opacity: 0.05;
-            z-index: 1;
-        }
-
-        .services::after {
-            content: '';
-            position: absolute;
-            top: 20%;
-            right: -50px;
-            width: 100px;
-            height: 100px;
-            background: var(--lavender);
-            border-radius: 50%;
-            opacity: 0.1;
-            z-index: 1;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 3rem;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-            font-weight: 700;
-            position: relative;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.2rem;
-            color: var(--text-light);
-            margin-bottom: 4rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .services-container {
-            display: flex;
-            flex-direction: column;
-            gap: 3rem;
-        }
-
-        .service-item {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 3rem;
-            align-items: center;
-            padding: 2rem 0;
-            border-bottom: 1px solid rgba(74, 111, 165, 0.1);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .service-item::before {
-            content: '';
-            position: absolute;
-            left: -20px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 4px;
-            height: 60px;
-            background: linear-gradient(to bottom, var(--primary-blue), var(--lavender));
-            border-radius: 2px;
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .service-item:hover::before {
-            opacity: 1;
-            height: 80px;
-        }
-
-        .service-item:last-child {
-            border-bottom: none;
-        }
-
-        .service-item:nth-child(even) {
-            grid-template-columns: 2fr 1fr;
-        }
-
-        .service-item:nth-child(even) .service-content {
-            order: -1;
-        }
-
-        .service-visual {
-            position: relative;
-            height: 300px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .service-visual::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
-            opacity: 0.8;
-            z-index: 2;
-        }
-
-        .service-visual i {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 4rem;
-            color: white;
-            z-index: 3;
-        }
-
-        .service-content h3 {
-            font-size: 2.2rem;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .service-content p {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-        }
-
-        .service-features {
-            list-style: none;
-            margin-bottom: 2rem;
-        }
-
-        .service-features li {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.5rem;
-            color: var(--text-light);
-            font-size: 1rem;
-        }
-
-        .service-features li i {
-            color: var(--lavender);
-            margin-right: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .service-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--primary-blue);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
-        }
-
-        .service-cta:hover {
-            background: var(--secondary-blue);
+        .btn-primary-custom:hover {
+            background-color: transparent;
+            color: var(--white);
+            border-color: var(--white);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(74, 111, 165, 0.3);
         }
 
-        /* About Section */
-        .about {
-            padding: 5rem 0;
-            background: var(--light-grey);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about::before {
-            content: '';
-            position: absolute;
-            top: 10%;
-            left: -30px;
-            width: 60px;
-            height: 60px;
-            background: var(--primary-blue);
-            border-radius: 50%;
-            opacity: 0.1;
-            animation: float 8s ease-in-out infinite reverse;
-        }
-
-        .about::after {
-            content: '';
-            position: absolute;
-            bottom: 20%;
-            right: -40px;
-            width: 80px;
-            height: 80px;
-            background: var(--lavender);
-            border-radius: 50%;
-            opacity: 0.1;
-            animation: float 10s ease-in-out infinite;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-text h2 {
-            font-size: 2.5rem;
-            color: var(--text-dark);
-            margin-bottom: 1.5rem;
-        }
-
-        .about-text p {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
-        .about-image {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-image img {
-            width: 100%;
+        .hero-image-placeholder {
+            background: var(--light-blue);
             height: 400px;
-            object-fit: cover;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 5rem 0;
-            background: var(--white);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact::before {
-            content: '';
-            position: absolute;
-            top: 30%;
-            left: -60px;
-            width: 120px;
-            height: 120px;
-            background: var(--secondary-blue);
-            border-radius: 50%;
-            opacity: 0.05;
-            animation: float 12s ease-in-out infinite;
-        }
-
-        .contact::after {
-            content: '';
-            position: absolute;
-            bottom: 10%;
-            right: -80px;
-            width: 160px;
-            height: 160px;
-            background: var(--primary-blue);
-            border-radius: 50%;
-            opacity: 0.05;
-            animation: float 14s ease-in-out infinite reverse;
-        }
-
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-        }
-
-        .contact-info h3 {
-            font-size: 1.8rem;
-            color: var(--text-dark);
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding: 1.5rem;
-            background: var(--white);
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-        }
-
-        .contact-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-        }
-
-        .contact-item i {
-            font-size: 1.5rem;
-            color: var(--primary-blue);
-            margin-right: 1.5rem;
-            width: 40px;
-            height: 40px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: var(--secondary-blue);
+            font-size: 1.2rem;
+            animation: fadeInRight 1s ease-out 0.5s both;
+        }
+
+        /* Services Section */
+        .services-section {
+            padding: 100px 0;
+            background-color: var(--light-grey);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border-color: var(--accent-lavender);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--accent-lavender);
+            margin-bottom: 20px;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        .service-description {
+            color: var(--secondary-blue);
+            line-height: 1.6;
+        }
+
+        .service-image-placeholder {
             background: var(--light-blue);
-            border-radius: 50%;
+            height: 200px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-blue);
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .about-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--secondary-blue);
+        }
+
+        .about-image-placeholder {
+            background: var(--light-blue);
+            height: 400px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-blue);
+            font-size: 1.2rem;
+        }
+
+        .trust-badge {
+            background: var(--light-blue);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .trust-badge i {
+            font-size: 2rem;
+            color: var(--accent-lavender);
+            margin-bottom: 10px;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: var(--white);
         }
 
         .contact-form {
-            background: var(--light-grey);
-            padding: 2rem;
+            background: var(--white);
+            padding: 40px;
             border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
-        .map-container {
-            margin-top: 2rem;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .map-container iframe {
-            width: 100%;
-            height: 300px;
-            border: none;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
+        .form-control {
+            padding: 15px;
+            border: 2px solid var(--light-blue);
+            border-radius: 10px;
+            margin-bottom: 20px;
             transition: border-color 0.3s ease;
         }
 
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary-blue);
+        .form-control:focus {
+            border-color: var(--accent-lavender);
+            box-shadow: 0 0 0 0.2rem rgba(159, 122, 234, 0.25);
         }
 
-        .form-group textarea {
-            height: 120px;
-            resize: vertical;
-        }
-
-        .submit-btn {
-            background: var(--dark-grey);
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
+        .form-label {
+            color: var(--primary-blue);
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
+            margin-bottom: 8px;
         }
 
-        .submit-btn:hover {
-            background: var(--primary-blue);
-            transform: translateY(-2px);
+        .contact-info {
+            padding: 40px 0;
+        }
+
+        .contact-card {
+            transition: transform 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-details a:hover {
+            color: var(--accent-lavender) !important;
+        }
+
+        @media (max-width: 768px) {
+            .contact-info {
+                margin-top: 2rem;
+            }
         }
 
         /* Footer */
         .footer {
-            background: var(--dark-grey);
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
+            border-top: 5px solid var(--accent-lavender);
         }
 
-        .footer p {
-            margin-bottom: 0.5rem;
-        }
-
-        .domain-highlight {
-            color: var(--lavender);
+        .footer h5 {
+            font-size: 1.1rem;
             font-weight: 600;
+        }
+
+        .footer ul li {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .footer .badge {
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                text-align: center;
+            }
+            
+            .footer .text-md-end {
+                text-align: center !important;
+            }
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(255, 255, 255, 0.98);
-                flex-direction: column;
-                padding: 1rem;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            .hero-section {
+                padding-top: 80px; /* Slightly less padding on mobile */
+                padding-bottom: 40px;
+                min-height: auto;
             }
-
-            .nav-links.active {
-                display: flex;
+            
+            .hero-title {
+                font-size: 2rem;
+                text-align: center;
             }
-
-            .mobile-menu {
-                display: flex;
+            
+            .hero-tagline {
+                font-size: 1.1rem;
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
             }
-
-            .hero {
-                height: 65vh;
-                padding: 3rem 0 2rem 0;
-            }
-
+            
             .hero-content {
-                padding: 0 1rem;
+                text-align: center;
+                padding: 1rem 0;
+                padding-top: 20px;
             }
-
-            .hero h1 {
-                font-size: 2.3rem;
-                margin-bottom: 1rem;
-                line-height: 1.2;
+            
+            .hero-section .img-fluid {
+                max-height: 200px;
+                margin: 20px auto 0;
             }
-
-            .hero p {
-                font-size: 1rem;
-                margin-bottom: 1.5rem;
-                line-height: 1.4;
+            
+            .btn-primary-custom {
+                display: block;
+                width: 100%;
+                max-width: 280px;
+                margin: 0 auto;
             }
-
-            .hero-stats {
-                flex-direction: row;
-                gap: 1rem;
-                margin-bottom: 2rem;
-                flex-wrap: wrap;
-                justify-content: center;
+            
+            .services-section,
+            .about-section,
+            .contact-section {
+                padding: 60px 0;
             }
-
-            .stat-item {
-                flex: 1;
-                min-width: 80px;
+            
+            .navbar-custom {
+                height: auto; /* Allow navbar to expand on mobile when menu is open */
             }
-
-            .stat-number {
-                font-size: 1.4rem;
-            }
-
-            .stat-label {
-                font-size: 0.75rem;
-            }
-
-
-            .about-content,
-            .contact-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .service-item {
-                grid-template-columns: 1fr !important;
-                gap: 2rem;
-                padding: 1.5rem 0;
-            }
-
-            .service-item:nth-child(even) .service-content {
-                order: 0;
-            }
-
-            .service-visual {
-                height: 250px;
-            }
-
-            .service-content h3 {
-                font-size: 1.8rem;
-            }
-
-            .section-title {
-                font-size: 2.2rem;
-            }
-
-            .map-container iframe {
-                height: 250px;
-            }
-
-            .nav-container {
-                padding: 0 1rem;
-            }
-
-            .container {
-                padding: 0 1rem;
-            }
-
-            .logo {
-                font-size: 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero {
-                height: 55vh;
-                padding: 2rem 0 1.5rem 0;
-            }
-
-            .hero h1 {
-                font-size: 1.8rem;
-                line-height: 1.1;
-                margin-bottom: 0.8rem;
-            }
-
-            .hero p {
-                font-size: 0.9rem;
-                line-height: 1.3;
-                margin-bottom: 1.2rem;
-            }
-
-            .hero-stats {
-                flex-direction: row;
-                gap: 0.8rem;
-                margin-bottom: 1.5rem;
-            }
-
-            .stat-number {
-                font-size: 1.2rem;
-            }
-
-            .stat-label {
-                font-size: 0.65rem;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-            }
-
-            .service-content h3 {
-                font-size: 1.5rem;
-            }
-
-            .service-visual {
-                height: 200px;
-            }
-
-            .contact-form {
-                padding: 1.5rem;
-            }
-
-            .contact-item {
-                padding: 1rem;
-            }
-
-            .map-container iframe {
-                height: 200px;
-            }
-
-            .logo {
-                font-size: 1.3rem;
-            }
-        }
-
-        /* Smooth Scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Animation Classes */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
         }
     </style>
 </head>
+
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">Constructive Consulting</a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="mobile-menu">
-                <span></span>
-                <span></span>
-                <span></span>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">Constructive Consulting</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Constructive Consulting</h1>
-            <p>Professional labor services you can trust. From plumbing to demolition, we deliver quality work with reliability and expertise.</p>
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number">500+</span>
-                    <span class="stat-label">Projects Completed</span>
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h1 class="hero-title">Constructive Consulting</h1>
+                        <p class="hero-tagline">Professional labor services you can trust. Quality work, reliable results, every time.</p>
+                        <a href="#contact" class="btn btn-primary-custom">Get Your Free Quote</a>
+                    </div>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">24/7</span>
-                    <span class="stat-label">Emergency Service</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">100%</span>
-                    <span class="stat-label">Satisfaction</span>
+                <div class="col-lg-6">
+                    <img src="hero.png" alt="Professional Construction Team" 
+                         class="img-fluid rounded shadow" style="width: 100%; height: auto;">
                 </div>
             </div>
-            <a href="#contact" class="cta-button">Get Your Free Quote</a>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="services">
+    <section id="services" class="py-5">
         <div class="container">
-            <h2 class="section-title fade-in">Our Services</h2>
-            <p class="section-subtitle fade-in">Professional labor services delivered with expertise, reliability, and attention to detail</p>
-            <div class="services-container">
-                <div class="service-item fade-in">
-                    <div class="service-visual">
-                        <i class="fas fa-wrench"></i>
-                    </div>
-                    <div class="service-content">
-                        <h3>Plumbing Services</h3>
-                        <p>Expert plumbing repairs, installations, and maintenance. From leaky faucets to complete bathroom renovations, we handle it all with precision and care.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Emergency repairs and maintenance</li>
-                            <li><i class="fas fa-check"></i> Bathroom and kitchen renovations</li>
-                            <li><i class="fas fa-check"></i> Pipe installation and replacement</li>
-                            <li><i class="fas fa-check"></i> Water heater services</li>
-                        </ul>
-                        <a href="#contact" class="service-cta">Get Plumbing Quote <i class="fas fa-arrow-right"></i></a>
+            <h2 class="text-center mb-5">What We Do</h2>
+            <div class="row g-4">
+                <!-- Plumbing -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-box text-center p-4 rounded shadow-sm h-100">
+                        <i class="bi bi-wrench-adjustable-circle fs-1 text-primary mb-3"></i>
+                        <h5>Plumbing</h5>
+                        <p class="small mb-0">Leaks, repairs, installations - we handle it all with skill and care.</p>
                     </div>
                 </div>
-                <div class="service-item fade-in">
-                    <div class="service-visual">
-                        <i class="fas fa-hammer"></i>
-                    </div>
-                    <div class="service-content">
-                        <h3>Demolition Work</h3>
-                        <p>Safe and efficient demolition services for residential and commercial projects. We ensure proper disposal and minimal disruption to your property.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Interior and exterior demolition</li>
-                            <li><i class="fas fa-check"></i> Safe asbestos removal</li>
-                            <li><i class="fas fa-check"></i> Debris cleanup and disposal</li>
-                            <li><i class="fas fa-check"></i> Structural modifications</li>
-                        </ul>
-                        <a href="#contact" class="service-cta">Get Demolition Quote <i class="fas fa-arrow-right"></i></a>
+
+                <!-- Demolition -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-box text-center p-4 rounded shadow-sm h-100">
+                        <i class="bi bi-hammer fs-1 text-primary mb-3"></i>
+                        <h5>Demolition</h5>
+                        <p class="small mb-0">Safe, controlled demolition for your renovation needs.</p>
                     </div>
                 </div>
-                <div class="service-item fade-in">
-                    <div class="service-visual">
-                        <i class="fas fa-tools"></i>
-                    </div>
-                    <div class="service-content">
-                        <h3>Handyman Services</h3>
-                        <p>Small and large household repairs you can count on. We handle everything from minor fixes to comprehensive maintenance solutions.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Small household repairs and maintenance</li>
-                            <li><i class="fas fa-check"></i> Large household repairs and installations</li>
-                            <li><i class="fas fa-check"></i> Furniture assembly and mounting</li>
-                            <li><i class="fas fa-check"></i> General maintenance tasks</li>
-                        </ul>
-                        <a href="#contact" class="service-cta">Get Handyman Quote <i class="fas fa-arrow-right"></i></a>
+
+                <!-- Handyman -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-box text-center p-4 rounded shadow-sm h-100">
+                        <i class="bi bi-tools fs-1 text-primary mb-3"></i>
+                        <h5>Handyman</h5>
+                        <p class="small mb-0">From minor fixes to home improvements - we've got you covered.</p>
                     </div>
                 </div>
-                <div class="service-item fade-in">
-                    <div class="service-visual">
-                        <i class="fas fa-trash-alt"></i>
-                    </div>
-                    <div class="service-content">
-                        <h3>Junk Removal</h3>
-                        <p>Fast and eco-friendly junk removal services. We'll clear out unwanted items and dispose of them responsibly, leaving your space clean and organized.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Residential and commercial cleanup</li>
-                            <li><i class="fas fa-check"></i> Furniture and appliance removal</li>
-                            <li><i class="fas fa-check"></i> Construction debris disposal</li>
-                            <li><i class="fas fa-check"></i> Eco-friendly recycling options</li>
-                        </ul>
-                        <a href="#contact" class="service-cta">Get Junk Removal Quote <i class="fas fa-arrow-right"></i></a>
+
+                <!-- Junk Removal -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-box text-center p-4 rounded shadow-sm h-100">
+                        <i class="bi bi-truck fs-1 text-primary mb-3"></i>
+                        <h5>Junk Removal</h5>
+                        <p class="small mb-0">Quick and eco-friendly disposal solutions.</p>
                     </div>
                 </div>
-                <div class="service-item fade-in">
-                    <div class="service-visual">
-                        <i class="fas fa-layer-group"></i>
-                    </div>
-                    <div class="service-content">
-                        <h3>Flooring Services</h3>
-                        <p>Professional flooring installation and repair services. From hardwood to tile, we deliver beautiful and durable flooring solutions.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Hardwood and laminate installation</li>
-                            <li><i class="fas fa-check"></i> Tile and vinyl flooring</li>
-                            <li><i class="fas fa-check"></i> Floor repairs and refinishing</li>
-                            <li><i class="fas fa-check"></i> Subfloor preparation and installation</li>
-                        </ul>
-                        <a href="#contact" class="service-cta">Get Flooring Quote <i class="fas fa-arrow-right"></i></a>
+
+                <!-- Flooring -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-box text-center p-4 rounded shadow-sm h-100">
+                        <i class="bi bi-grid-3x3-gap fs-1 text-primary mb-3"></i>
+                        <h5>Flooring</h5>
+                        <p class="small mb-0">Professional flooring installation and repair services.</p>
                     </div>
                 </div>
-                <div class="service-item fade-in">
-                    <div class="service-visual">
-                        <i class="fas fa-paint-roller"></i>
-                    </div>
-                    <div class="service-content">
-                        <h3>Drywall and Painting</h3>
-                        <p>Expert drywall installation, repair, and painting services. We transform your spaces with professional finishing work.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Drywall installation and repair</li>
-                            <li><i class="fas fa-check"></i> Interior and exterior painting</li>
-                            <li><i class="fas fa-check"></i> Texturing and finishing</li>
-                            <li><i class="fas fa-check"></i> Color consultation and application</li>
-                        </ul>
-                        <a href="#contact" class="service-cta">Get Drywall & Painting Quote <i class="fas fa-arrow-right"></i></a>
+
+                <!-- Drywall and Painting -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-box text-center p-4 rounded shadow-sm h-100">
+                        <i class="bi bi-paint-bucket fs-1 text-primary mb-3"></i>
+                        <h5>Drywall & Painting</h5>
+                        <p class="small mb-0">Expert drywall installation, repair, and painting services.</p>
                     </div>
                 </div>
-                <div class="service-item fade-in">
-                    <div class="service-visual">
-                        <i class="fas fa-hard-hat"></i>
-                    </div>
-                    <div class="service-content">
-                        <h3>Concrete Services</h3>
-                        <p>Professional concrete work including driveway repairs and porch installations. Durable solutions built to last.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Driveway repairs and resurfacing</li>
-                            <li><i class="fas fa-check"></i> Porch repairs and construction</li>
-                            <li><i class="fas fa-check"></i> Concrete patios and walkways</li>
-                            <li><i class="fas fa-check"></i> Foundation and structural work</li>
-                        </ul>
-                        <a href="#contact" class="service-cta">Get Concrete Quote <i class="fas fa-arrow-right"></i></a>
+
+                <!-- Concrete -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-box text-center p-4 rounded shadow-sm h-100">
+                        <i class="bi bi-cone-striped fs-1 text-primary mb-3"></i>
+                        <h5>Concrete</h5>
+                        <p class="small mb-0">Driveway repairs, porch repairs, and concrete installations.</p>
                     </div>
                 </div>
-                <div class="service-item fade-in">
-                    <div class="service-visual">
-                        <i class="fas fa-home"></i>
-                    </div>
-                    <div class="service-content">
-                        <h3>Renovation Services</h3>
-                        <p>Complete home renovation services from kitchen makeovers to washer room upgrades. We bring your vision to life.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Kitchen renovations and remodeling</li>
-                            <li><i class="fas fa-check"></i> Washer room and utility renovations</li>
-                            <li><i class="fas fa-check"></i> General home renovations</li>
-                            <li><i class="fas fa-check"></i> Custom design and installation</li>
-                        </ul>
-                        <a href="#contact" class="service-cta">Get Renovation Quote <i class="fas fa-arrow-right"></i></a>
+
+                <!-- Renovation -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-box text-center p-4 rounded shadow-sm h-100">
+                        <i class="bi bi-house-gear fs-1 text-primary mb-3"></i>
+                        <h5>Renovation</h5>
+                        <p class="small mb-0">Bathroom, basement, and general home renovations.</p>
                     </div>
                 </div>
             </div>
@@ -1067,112 +506,121 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about">
+    <section id="about" class="py-5 bg-light">
         <div class="container">
-            <div class="about-content">
-                <div class="about-text fade-in">
-                    <h2>About Constructive Consulting</h2>
-                    <p>We are a professional labor company dedicated to delivering exceptional service and quality workmanship. While we may be relatively new to the industry, our commitment to excellence and customer satisfaction sets us apart.</p>
-                    <p>Our team consists of skilled professionals who take pride in their work and understand the importance of reliability in the construction and maintenance industry. We believe in building lasting relationships with our clients through transparent communication and superior results.</p>
-                    <p>We are also available to work as subcontractors for larger companies, taking on large jobs or services from their workload. Our flexible approach allows us to adapt to various project sizes and requirements, making us a reliable partner for both individual homeowners and established construction firms.</p>
-                    <p>When you choose Constructive Consulting, you're choosing a partner who values your time, respects your property, and delivers the quality work you deserve.</p>
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="mb-4">Our Story</h2>
+                    <p class="lead">We're your local experts in construction and maintenance, bringing skill and reliability to every project.</p>
+                    <p>From simple fixes to complex renovations, our team delivers quality results that last. We are also available to work as subcontractors for larger companies, taking on service calls from their workload.</p>
                 </div>
-                <div class="about-image fade-in">
-                    <img src="image (2).png" alt="Professional construction team at work">
+                <div class="col-lg-6">
+                    <img src="image (2).png" alt="Our Professional Team" class="img-fluid rounded shadow">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <section id="contact" class="contact-section">
         <div class="container">
-            <h2 class="section-title fade-in">Get In Touch</h2>
-            <div class="contact-content">
-                <div class="contact-info fade-in">
-                    <h3>Contact Information</h3>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <strong>Email:</strong><br>
-                            info@constructiveconsulting.icloud
+            <h2 class="section-title text-white">Get In Touch</h2>
+            <div class="row">
+                <div class="col-lg-8">
+                    <form class="contact-form" id="contactForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="name" class="form-label">Full Name *</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Email Address *</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <strong>Phone:</strong><br>
-                            (555) 123-4567
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="phone" name="phone">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="service" class="form-label">Service Needed</label>
+                                <select class="form-control" id="service" name="service">
+                                    <option value="">Select a service</option>
+                                    <option value="plumbing">Plumbing Services</option>
+                                    <option value="demolition">Demolition Work</option>
+                                    <option value="handyman">Handyman Services</option>
+                                    <option value="junk-removal">Junk Removal</option>
+                                    <option value="flooring">Flooring Services</option>
+                                    <option value="drywall-painting">Drywall and Painting</option>
+                                    <option value="concrete">Concrete Services</option>
+                                    <option value="renovation">Renovation Services</option>
+                                    <option value="multiple">Multiple Services</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <strong>Service Area:</strong><br>
-                            Greater Metropolitan Area
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Project Details *</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" placeholder="Please describe your project and any specific requirements..." required></textarea>
                         </div>
-                    </div>
-                    <div class="map-container">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2918.1234567890123!2d-79.55555555555555!3d43.19444444444444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882c9b1234567890%3A0x1234567890abcdef!2sGrimsby%2C%20ON%2C%20Canada!5e0!3m2!1sen!2sca!4v1625097602920!5m2!1sen!2sca" 
-                                allowfullscreen="" 
-                                loading="lazy" 
-                                referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
-                    </div>
-                </div>
-                <div class="contact-form fade-in">
-                    <h3>Request a Quote</h3>
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Full Name *</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email Address *</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone">
-                        </div>
-                        <div class="form-group">
-                            <label for="service">Service Needed *</label>
-                            <select id="service" name="service" required>
-                                <option value="">Select a service</option>
-                                <option value="plumbing">Plumbing Services</option>
-                                <option value="demolition">Demolition Work</option>
-                                <option value="handyman">Handyman Services</option>
-                                <option value="junk-removal">Junk Removal</option>
-                                <option value="flooring">Flooring Services</option>
-                                <option value="drywall-painting">Drywall and Painting</option>
-                                <option value="concrete">Concrete Services</option>
-                                <option value="renovation">Renovation Services</option>
-                                <option value="multiple">Multiple Services</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Project Details *</label>
-                            <textarea id="message" name="message" placeholder="Please describe your project needs..." required></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">
-                            <span class="btn-text">Send Message</span>
-                            <span class="loading" style="display: none;"></span>
-                        </button>
+                        <button type="submit" class="btn btn-dark">Send Message</button>
                     </form>
+                </div>
+                <div class="col-lg-4">
+                    <div class="contact-info text-white">
+                        <div class="contact-card p-4 mb-4 rounded" style="background: rgba(255, 255, 255, 0.1);">
+                            <h4 class="mb-3"><i class="bi bi-envelope me-2"></i>Contact Details</h4>
+                            <div class="contact-details">
+                                <p class="mb-2">
+                                    <strong>Email:</strong><br>
+                                    <a href="mailto:constructiveconsultingservices@gmail.com" class="text-white text-decoration-none">
+                                        constructiveconsultingservices@gmail.com
+                                    </a>
+                                </p>
+                                <p class="mb-2">
+                                    <strong>Phone:</strong><br>
+                                    <a href="tel:2262011749" class="text-white text-decoration-none">(226) 201-1749</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="contact-card p-4 mb-4 rounded" style="background: rgba(255, 255, 255, 0.1);">
+                            <h4 class="mb-3"><i class="bi bi-geo-alt me-2"></i>Service Areas</h4>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2">Brantford, Simcoe, and Woodstock</li>
+                                <li class="mb-2">Hamilton, Burlington, and Oakville</li>
+                                <li class="mb-2">Cambridge, Kitchener, and Waterloo</li>
+                                <li class="text-light"><small><em>And all surrounding areas</em></small></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer py-4" style="background-color: var(--dark-grey);">
         <div class="container">
-            <p>&copy; 2024 Constructive Consulting. All rights reserved.</p>
-            <p>Professional labor services you can trust.</p>
+            <div class="row align-items-center justify-content-between">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <p class="text-light mb-0">
+                        <i class="bi bi-telephone-fill me-2"></i>(226) 201-1749
+                        <span class="mx-2">|</span>
+                        <i class="bi bi-envelope-fill me-2"></i>constructiveconsultingservices@gmail.com
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-light mb-0">&copy; 2024 Constructive Consulting. All rights reserved.</p>
+                </div>
+            </div>
         </div>
     </footer>
 
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
     <script>
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1188,94 +636,61 @@
             });
         });
 
-        // Navbar background on scroll
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-            } else {
-                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-            }
-        });
-
-        // Fade in animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Contact form handling
+        // Form validation and submission
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const submitBtn = this.querySelector('.submit-btn');
-            const btnText = submitBtn.querySelector('.btn-text');
-            const loading = submitBtn.querySelector('.loading');
+            // Basic form validation
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();   
             
-            // Show loading state
-            btnText.style.display = 'none';
-            loading.style.display = 'inline-block';
-            submitBtn.disabled = true;
+            if (!name || !email || !message) {
+                alert('Please fill in all required fields.');
+                return;
+            }
             
-            // Simulate form submission (replace with actual form handling)
-            setTimeout(() => {
-                alert('Thank you for your message! We will contact you within 24 hours.');
-                this.reset();
-                
-                // Reset button state
-                btnText.style.display = 'inline';
-                loading.style.display = 'none';
-                submitBtn.disabled = false;
-            }, 2000);
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            
+            // Success message
+            alert('Thank you for your message! We\'ll get back to you within 24 hours.');
+            this.reset();
         });
 
-        // Mobile menu toggle (improved implementation)
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const navLinks = document.querySelector('.nav-links');
-        
-        mobileMenu.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
+        // Navbar background change on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(74, 85, 104, 0.95)';
+            } else {
+                navbar.style.background = 'var(--primary-blue)';
+            }
         });
 
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', function() {
-                if (window.innerWidth <= 768) {
-                    navLinks.classList.remove('active');
-                    mobileMenu.classList.remove('active');
-                }
+        // Animation for service cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const options = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, options);
+
+            // Observe all service boxes
+            document.querySelectorAll('.service-box').forEach(box => {
+                observer.observe(box);
             });
-        });
-
-        // Handle window resize
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 768) {
-                navLinks.classList.remove('active');
-                mobileMenu.classList.remove('active');
-            }
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(event) {
-            if (window.innerWidth <= 768) {
-                if (!mobileMenu.contains(event.target) && !navLinks.contains(event.target)) {
-                    navLinks.classList.remove('active');
-                    mobileMenu.classList.remove('active');
-                }
-            }
         });
     </script>
 </body>

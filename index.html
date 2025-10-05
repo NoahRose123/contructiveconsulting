@@ -11,6 +11,9 @@
     <!-- Bootstrap Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
     
+    <!-- Google reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6Le0fd8rAAAAAP9R_Bs9uBVTXxZVKBl_nFAZBiZv"></script>
+    
     <style>
         /* Custom CSS with Greyish Blue Theme */
         :root {
@@ -291,6 +294,8 @@
         .contact-details a:hover {
             color: var(--accent-lavender) !important;
         }
+
+        /* reCAPTCHA v3 is invisible, no styling needed */
 
         @media (max-width: 768px) {
             .contact-info {
@@ -741,7 +746,7 @@
         })();
 
         // Form validation and submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Basic form validation
@@ -760,6 +765,13 @@
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 alert('Please enter a valid email address.');
+                return;
+            }
+            
+            // reCAPTCHA v3 validation - get token
+            const recaptchaToken = await grecaptcha.execute('6Le0fd8rAAAAAP9R_Bs9uBVTXxZVKBl_nFAZBiZv', {action: 'submit'});
+            if (!recaptchaToken) {
+                alert('reCAPTCHA verification failed. Please try again.');
                 return;
             }
             

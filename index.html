@@ -278,6 +278,25 @@
             font-weight: 600;
             margin-bottom: 8px;
         }
+        
+        .form-control.is-invalid {
+            border-color: #dc3545;
+        }
+        
+        .form-control.is-valid {
+            border-color: #28a745;
+        }
+        
+        .invalid-feedback {
+            display: none;
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        
+        .invalid-feedback.show {
+            display: block;
+        }
 
         .contact-info {
             padding: 40px 0;
@@ -629,10 +648,21 @@
             <div class="row">
                 <div class="col-lg-8">
                     <form class="contact-form" id="contactForm">
+                        <!-- Honeypot field - hidden from users, bots will fill it -->
+                        <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                            <input type="text" name="website" id="website" tabindex="-1" autocomplete="off">
+                        </div>
+                        
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="name" class="form-label">Full Name *</label>
-                                <input type="text" class="form-control" id="name" name="name" required>
+                                <input type="text" class="form-control" id="name" name="name" required 
+                                       pattern="[A-Za-zÀ-ÿ\s\-']+" 
+                                       minlength="2" 
+                                       maxlength="100"
+                                       title="Please enter a valid name (letters, spaces, hyphens, and apostrophes only)">
+                                <div class="invalid-feedback" id="name-feedback"></div>
+                                <small class="form-text text-muted" style="color: var(--secondary-blue) !important;">Please enter your name</small>
                             </div>
                             <div class="col-md-6">
                                 <label for="email" class="form-label">Email Address *</label>
@@ -663,7 +693,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="message" class="form-label">Project Details *</label>
-                            <textarea class="form-control" id="message" name="message" rows="5" placeholder="Please describe your project and any specific requirements..." required></textarea>
+                            <textarea class="form-control" id="message" name="message" rows="5" placeholder="Please describe your project and any specific requirements..." required minlength="10" maxlength="2000"></textarea>
                         </div>
                         <button type="submit" class="btn btn-dark">Send Message</button>
                     </form>
@@ -745,33 +775,217 @@
             emailjs.init("mdOUBsKrVuJyS3qcj");
         })();
 
+        // Track form load time for bot detection
+        const formLoadTime = Date.now();
+        
+        // Track form interactions to detect bots
+        let formInteractionCount = 0;
+        document.getElementById('contactForm').addEventListener('input', function() {
+            formInteractionCount++;
+        });
+        
+        // Rate limiting function
+        function checkRateLimit() {
+            const now = Date.now();
+            const lastSubmission = localStorage.getItem('lastFormSubmission');
+            
+            if (lastSubmission) {
+                const timeSinceLastSubmission = now - parseInt(lastSubmission);
+                const cooldownPeriod = 60000; // 1 minute cooldown
+                
+                if (timeSinceLastSubmission < cooldownPeriod) {
+                    const remainingSeconds = Math.ceil((cooldownPeriod - timeSinceLastSubmission) / 1000);
+                    return {
+                        allowed: false,
+                        message: `Please wait ${remainingSeconds} seconds before submitting again.`
+                    };
+                }
+            }
+            
+            return { allowed: true };
+        }
+        
+        function setRateLimit() {
+            localStorage.setItem('lastFormSubmission', Date.now().toString());
+        }
+
+        // Advanced spam detection functions
+        function isValidName(name) {
+            const words = name.trim().split(/\s+/);
+            
+            // Name must be at least 2 characters total
+            if (name.trim().length < 2) {
+                return { valid: false, message: 'Name must be at least 2 characters.' };
+            }
+            
+            // Each word must be at least 2 characters
+            for (let word of words) {
+                if (word.length < 2) {
+                    return { valid: false, message: 'Each name must be at least 2 characters.' };
+                }
+            }
+            
+            // Check for excessive numbers (names shouldn't have many numbers)
+            const numberCount = (name.match(/\d/g) || []).length;
+            if (numberCount > 0) {
+                return { valid: false, message: 'Names should not contain numbers.' };
+            }
+            
+            // Check for repeating characters (e.g., "aaaaaaa")
+            if (/(.)\1{4,}/.test(name)) {
+                return { valid: false, message: 'Please enter a valid name.' };
+            }
+            
+            // Check for keyboard mashing patterns
+            const mashPatterns = [
+                /asdf|qwer|zxcv|hjkl/i,
+                /1234|2345|3456/,
+                /abcd|bcde|cdef/i
+            ];
+            for (let pattern of mashPatterns) {
+                if (pattern.test(name)) {
+                    return { valid: false, message: 'Please enter a real name.' };
+                }
+            }
+            
+            // Each word should have vowels (real names have vowels)
+            for (let word of words) {
+                if (!/[aeiouAEIOU]/.test(word) && word.length > 2) {
+                    return { valid: false, message: 'Please enter a valid name.' };
+                }
+            }
+            
+            return { valid: true };
+        }
+        
+        function detectSpamPatterns(text) {
+            // Common spam indicators
+            const spamPatterns = [
+                /\b(viagra|cialis|casino|lottery|prize)\b/i,
+                /\b(click here|buy now|limited time)\b/i,
+                /(http|https|www\.)\S+/i,  // URLs in message
+                /(.)\1{10,}/,  // Excessive character repetition
+                /[A-Z]{20,}/,  // Excessive caps
+            ];
+            
+            for (let pattern of spamPatterns) {
+                if (pattern.test(text)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        function isValidEmail(email) {
+            // More strict email validation
+            const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailRegex.test(email)) {
+                return false;
+            }
+            
+            // Check for common spam email patterns
+            const spamDomains = ['example.com', 'test.com', 'temp-mail.', 'guerrillamail.'];
+            for (let domain of spamDomains) {
+                if (email.toLowerCase().includes(domain)) {
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+
         // Form validation and submission
         document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            // Basic form validation
+            // ANTI-SPAM CHECK 0: Rate limiting
+            const rateLimitCheck = checkRateLimit();
+            if (!rateLimitCheck.allowed) {
+                alert(rateLimitCheck.message);
+                return;
+            }
+            
+            // ANTI-BOT CHECK 1: Honeypot field
+            const honeypot = document.getElementById('website').value;
+            if (honeypot) {
+                console.log('Bot detected: honeypot filled');
+                // Silently fail for bots (don't tell them why)
+                setTimeout(() => {
+                    document.getElementById('contactForm').reset();
+                }, 1000);
+                return;
+            }
+            
+            // ANTI-BOT CHECK 2: Submission timing (must take at least 3 seconds)
+            const timeSinceLoad = Date.now() - formLoadTime;
+            if (timeSinceLoad < 3000) {
+                alert('Please take a moment to review your information before submitting.');
+                return;
+            }
+            
+            // ANTI-BOT CHECK 3: Form interaction check
+            if (formInteractionCount < 3) {
+                alert('Please fill out the form completely.');
+                return;
+            }
+            
+            // Get form values
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
             const phone = document.getElementById('phone').value.trim();
             const service = document.getElementById('service').value;
             const message = document.getElementById('message').value.trim();   
             
+            // Basic required field validation
             if (!name || !email || !message) {
                 alert('Please fill in all required fields.');
                 return;
             }
             
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
+            // ANTI-SPAM CHECK 1: Validate name format
+            const nameValidation = isValidName(name);
+            if (!nameValidation.valid) {
+                alert(nameValidation.message);
+                return;
+            }
+            
+            // ANTI-SPAM CHECK 2: Email validation
+            if (!isValidEmail(email)) {
                 alert('Please enter a valid email address.');
                 return;
             }
             
+            // ANTI-SPAM CHECK 3: Message length check
+            if (message.length < 10) {
+                alert('Please provide more details about your project (at least 10 characters).');
+                return;
+            }
+            
+            // ANTI-SPAM CHECK 4: Spam pattern detection
+            if (detectSpamPatterns(message) || detectSpamPatterns(name)) {
+                alert('Your message contains invalid content. Please revise and try again.');
+                return;
+            }
+            
+            // ANTI-SPAM CHECK 5: Phone validation (if provided)
+            if (phone) {
+                const phoneDigits = phone.replace(/\D/g, '');
+                if (phoneDigits.length < 10 || phoneDigits.length > 15) {
+                    alert('Please enter a valid phone number.');
+                    return;
+                }
+            }
+            
             // reCAPTCHA v3 validation - get token
-            const recaptchaToken = await grecaptcha.execute('6Le0fd8rAAAAAP9R_Bs9uBVTXxZVKBl_nFAZBiZv', {action: 'submit'});
-            if (!recaptchaToken) {
-                alert('reCAPTCHA verification failed. Please try again.');
+            try {
+                const recaptchaToken = await grecaptcha.execute('6Le0fd8rAAAAAP9R_Bs9uBVTXxZVKBl_nFAZBiZv', {action: 'submit'});
+                if (!recaptchaToken) {
+                    alert('Security verification failed. Please try again.');
+                    return;
+                }
+            } catch (error) {
+                console.error('reCAPTCHA error:', error);
+                alert('Security verification failed. Please refresh the page and try again.');
                 return;
             }
             
@@ -794,7 +1008,9 @@
                 email_address: email,
                 phone_number: phone || 'Not provided',
                 service_needed: service || 'Not specified',
-                project_details: message
+                project_details: message,
+                // Timestamp for tracking
+                submission_time: new Date().toLocaleString()
             };
             
             // Send email using EmailJS
@@ -802,7 +1018,13 @@
                 .then(function(response) {
                     console.log('SUCCESS!', response.status, response.text);
                     alert('Thank you for your message! We\'ll get back to you within 24 hours.');
+                    
+                    // Set rate limit after successful submission
+                    setRateLimit();
+                    
                     document.getElementById('contactForm').reset();
+                    // Reset interaction counter
+                    formInteractionCount = 0;
                 }, function(error) {
                     console.log('FAILED...', error);
                     alert('Sorry, there was an error sending your message. Please try again or contact us directly at (226) 201-1749.');
@@ -812,6 +1034,32 @@
                     submitBtn.textContent = originalText;
                     submitBtn.disabled = false;
                 });
+        });
+        
+        // Real-time name validation
+        document.getElementById('name').addEventListener('blur', function() {
+            const nameField = this;
+            const feedback = document.getElementById('name-feedback');
+            const nameValue = nameField.value.trim();
+            
+            if (!nameValue) {
+                nameField.classList.remove('is-valid', 'is-invalid');
+                feedback.classList.remove('show');
+                return;
+            }
+            
+            const validation = isValidName(nameValue);
+            
+            if (!validation.valid) {
+                nameField.classList.add('is-invalid');
+                nameField.classList.remove('is-valid');
+                feedback.textContent = validation.message;
+                feedback.classList.add('show');
+            } else {
+                nameField.classList.add('is-valid');
+                nameField.classList.remove('is-invalid');
+                feedback.classList.remove('show');
+            }
         });
 
         // Navbar background change on scroll
